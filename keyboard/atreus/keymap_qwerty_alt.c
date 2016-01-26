@@ -5,10 +5,15 @@
                             SHIFT(KC_6), SHIFT(KC_7), SHIFT(KC_BSLS), SHIFT(KC_9),    SHIFT(KC_0),                    SHIFT(KC_5), KC_1,   KC_2,   KC_3, KC_BSLS, \
                             KC_FN1,      KC_GRAVE,    KC_LGUI,        KC_LSFT,        KC_DEL,         KC_FN4, KC_FN5, KC_SPC,      KC_FN0, KC_DOT, KC_0, KC_EQUAL)
 
-#define LAYER_TWO_ALT KEYMAP(KC_HOME, KC_UP,           KC_END,   KC_NO,   KC_PGUP,                 KC_F13,  KC_F7,  KC_F8, KC_F9, KC_F10, \
-                             KC_LEFT, KC_DOWN,         KC_RIGHT, KC_NO,   KC_PGDN,                 KC_F14,  KC_F4,  KC_F5, KC_F6, KC_F11, \
-                             KC_MUTE, KC_VOLD,         KC_VOLU,  KC_NO,   KC_NO,                   KC_F15,  KC_F1,  KC_F2, KC_F3, KC_F12, \
-                             KC_NO,   SHIFT(KC_GRAVE), KC_LGUI,  KC_LSFT, KC_BSPC, KC_FN4, KC_FN5, KC_SPC, KC_FN2, KC_NO, KC_NO, KC_FN3)
+#define LAYER_TWO_ALT KEYMAP(KC_HOME,  KC_UP,   KC_END,    KC_NO,   KC_PGUP,                 KC_F13,  KC_F7,  KC_F8, KC_F9, KC_F10, \
+                             KC_LEFT,  KC_DOWN, KC_RIGHT,  KC_NO,   KC_PGDN,                 KC_F14,  KC_F4,  KC_F5, KC_F6, KC_F11, \
+                             KC__MUTE, KC_VOLD, KC_VOLU, KC_NO,   KC_NO,                   KC_F15,  KC_F1,  KC_F2, KC_F3, KC_F12, \
+                             KC_PWR,   KC_SLEP,  KC_LGUI,   KC_LSFT, KC_BSPC, KC_FN4, KC_FN5, KC_SPC,  KC_FN2, KC_NO, KC_NO, KC_FN6)
+
+#define RESET_LAYER KEYMAP(KC_FN3, KC_NO, KC_NO, KC_NO, KC_NO,               KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
+                           KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,               KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
+                           KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,               KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
+                           KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_FN7)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 0: mostly letters */
@@ -19,7 +24,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 1: punctuation and numbers and arrow keys */
   FN_LAYER_ALT,                                     \
   /* 2: arrows and function keys and volume keys */
-  LAYER_TWO_ALT
+  LAYER_TWO_ALT,
+  RESET_LAYER
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -28,7 +34,9 @@ const uint16_t PROGMEM fn_actions[] = {
   [2] = ACTION_LAYER_OFF(2, 1),  // switch back to layer 0
   [3] = ACTION_FUNCTION(BOOTLOADER),
   [4] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC), // CRTL key when held, ESC when tapped
-  [5] = ACTION_MODS_TAP_KEY(MOD_LALT, KC_ENT) // ALT key when held, ENTER when tapped
+  [5] = ACTION_MODS_TAP_KEY(MOD_LALT, KC_ENT), // ALT key when held, ENTER when tapped
+  [6] = ACTION_LAYER_ON(3, 1),  // switch to layer 3
+  [7] = ACTION_LAYER_OFF(3, 1),  // switch back to layer 0
 };
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
